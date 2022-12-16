@@ -1,0 +1,66 @@
+(--MAGMAFLOW2--
+global MagmaFlowEditor_EditBLOPHistory = #()
+node35 = magmaNode.createNode "BLOP" 
+magmaNode.setNumNodeInputs node35 1 
+magmaNode.setNumNodeOutputs node35 1 
+magmaNode.DeclareExtensionProperty node35 "BLOPInputSocketName1"
+magmaNode.SetNodeProperty node35 "BLOPInputSocketName1" "Float"
+magmaNode.DeclareExtensionProperty node35 "BLOPOutputSocketName1"
+magmaNode.SetNodeProperty node35 "BLOPOutputSocketName1" "Log10"
+magmaNode.DeclareExtensionProperty node35 "Name"
+magmaNode.SetNodeProperty node35 "Name" "Log10"
+magmaNode.DeclareExtensionProperty node35 "Notes"
+magmaNode.SetNodeProperty node35 "Notes" "Input is a Float value.\n\nOutput is the Logarithm \nof the Float value \nwith Base 10."
+magmaNode.DeclareExtensionProperty node35 "Position"
+magmaNode.SetNodeProperty node35 "Position" [680,270]
+--------------------------------------------
+magmaNode.PushEditableBLOP node35 
+append ::MagmaFlowEditor_EditBLOPHistory node35
+node37 = magmaNode.createNode "InputValue" 
+magmaNode.setNumNodeInputs node37 0 
+magmaNode.setNumNodeOutputs node37 1 
+magmaNode.setNodeProperty node37 "forceInteger" false
+ctrl=bezier_float(); ctrl.value = 10.0
+magmaNode.setNodeProperty node37 "controller" ctrl
+magmaNode.DeclareExtensionProperty node37 "Name"
+magmaNode.SetNodeProperty node37 "Name" "Float"
+magmaNode.DeclareExtensionProperty node37 "Position"
+magmaNode.SetNodeProperty node37 "Position" [230,140]
+--------------------------------------------
+node38 = magmaNode.createNode "Log" 
+magmaNode.setNumNodeInputs node38 1 
+magmaNode.setNumNodeOutputs node38 1 
+magmaNode.DeclareExtensionProperty node38 "Name"
+magmaNode.SetNodeProperty node38 "Name" "Log"
+magmaNode.DeclareExtensionProperty node38 "Position"
+magmaNode.SetNodeProperty node38 "Position" [380,50]
+--------------------------------------------
+node39 = magmaNode.createNode "Divide" 
+magmaNode.setNumNodeInputs node39 2 
+magmaNode.setNumNodeOutputs node39 1 
+magmaNode.setNodeInputDefaultValue node39 1 1.0
+magmaNode.setNodeInputDefaultValue node39 2 1.0
+magmaNode.DeclareExtensionProperty node39 "Name"
+magmaNode.SetNodeProperty node39 "Name" "Divide"
+magmaNode.DeclareExtensionProperty node39 "Position"
+magmaNode.SetNodeProperty node39 "Position" [530,50]
+--------------------------------------------
+node40 = magmaNode.createNode "Log" 
+magmaNode.setNumNodeInputs node40 1 
+magmaNode.setNumNodeOutputs node40 1 
+magmaNode.DeclareExtensionProperty node40 "Name"
+magmaNode.SetNodeProperty node40 "Name" "Log"
+magmaNode.DeclareExtensionProperty node40 "Position"
+magmaNode.SetNodeProperty node40 "Position" [380,140]
+--------------------------------------------
+try(magmaNode.setNodeInput node38 1 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 1)[1] 1)catch()
+try(magmaNode.setNodeInput node39 1 node38 1)catch()
+try(magmaNode.setNodeInput node39 2 node40 1)catch()
+try(magmaNode.setNodeInput node40 1 node37 1)catch()
+try(magmaNode.setOutput 1 node39 1)catch(format "Failed To Connect Output 1\n")
+magmaNode.PopEditableBLOP() 
+--------------------------------------------
+magmaNode.setNodeInput node35 1 -1 1 
+--------------------------------------------
+)
+

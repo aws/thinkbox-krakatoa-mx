@@ -1,0 +1,174 @@
+(--MAGMAFLOW2--
+global MagmaFlowEditor_EditBLOPHistory = #()
+magmaNode.note=""
+node26 = magmaNode.createNode "BLOP" 
+magmaNode.setNumNodeInputs node26 3 
+magmaNode.setNumNodeOutputs node26 1 
+magmaNode.DeclareExtensionProperty node26 "BLOPInputSocketName1"
+magmaNode.SetNodeProperty node26 "BLOPInputSocketName1" "Geometry"
+magmaNode.DeclareExtensionProperty node26 "BLOPInputSocketName2"
+magmaNode.SetNodeProperty node26 "BLOPInputSocketName2" "ObjIndex"
+magmaNode.DeclareExtensionProperty node26 "BLOPInputSocketName3"
+magmaNode.SetNodeProperty node26 "BLOPInputSocketName3" "FaceIndex"
+magmaNode.DeclareExtensionProperty node26 "BLOPOutputSocketName1"
+magmaNode.SetNodeProperty node26 "BLOPOutputSocketName1" "FaceArea"
+magmaNode.DeclareExtensionProperty node26 "Name"
+magmaNode.SetNodeProperty node26 "Name" "FaceArea"
+magmaNode.DeclareExtensionProperty node26 "Notes"
+magmaNode.SetNodeProperty node26 "Notes" "Calculates the Face Area\nBased on Geometry Object,\nObject Index and Face Index."
+magmaNode.DeclareExtensionProperty node26 "Position"
+magmaNode.SetNodeProperty node26 "Position" [580,410]
+magmaNode.DeclareExtensionProperty node26 "Selected"
+magmaNode.SetNodeProperty node26 "Selected" true
+--------------------------------------------
+magmaNode.PushEditableBLOP node26 
+append ::MagmaFlowEditor_EditBLOPHistory node26
+node28 = magmaNode.createNode "FaceQuery" 
+magmaNode.setNumNodeInputs node28 4 
+magmaNode.setNumNodeOutputs node28 1 
+magmaNode.setNodeInputDefaultValue node28 2 0
+magmaNode.setNodeInputDefaultValue node28 3 0
+magmaNode.setNodeInputDefaultValue node28 4 [1,0,0]
+magmaNode.setNodeProperty node28 "exposePosition" true
+magmaNode.setNodeProperty node28 "channels" ""
+magmaNode.DeclareExtensionProperty node28 "EditorPan"
+magmaNode.SetNodeProperty node28 "EditorPan" [0,0]
+magmaNode.DeclareExtensionProperty node28 "EditorZoom"
+magmaNode.SetNodeProperty node28 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node28 "Name"
+magmaNode.SetNodeProperty node28 "Name" "Vertex1"
+magmaNode.DeclareExtensionProperty node28 "Position"
+magmaNode.SetNodeProperty node28 "Position" [310,20]
+--------------------------------------------
+node29 = magmaNode.createNode "FaceQuery" 
+magmaNode.setNumNodeInputs node29 4 
+magmaNode.setNumNodeOutputs node29 1 
+magmaNode.setNodeInputDefaultValue node29 2 0
+magmaNode.setNodeInputDefaultValue node29 3 0
+magmaNode.setNodeInputDefaultValue node29 4 [0,1,0]
+magmaNode.setNodeProperty node29 "exposePosition" true
+magmaNode.setNodeProperty node29 "channels" ""
+magmaNode.DeclareExtensionProperty node29 "EditorPan"
+magmaNode.SetNodeProperty node29 "EditorPan" [0,0]
+magmaNode.DeclareExtensionProperty node29 "EditorZoom"
+magmaNode.SetNodeProperty node29 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node29 "Name"
+magmaNode.SetNodeProperty node29 "Name" "Vertex2"
+magmaNode.DeclareExtensionProperty node29 "Position"
+magmaNode.SetNodeProperty node29 "Position" [310,120]
+--------------------------------------------
+node30 = magmaNode.createNode "FaceQuery" 
+magmaNode.setNumNodeInputs node30 4 
+magmaNode.setNumNodeOutputs node30 1 
+magmaNode.setNodeInputDefaultValue node30 2 0
+magmaNode.setNodeInputDefaultValue node30 3 0
+magmaNode.setNodeInputDefaultValue node30 4 [0,0,1]
+magmaNode.setNodeProperty node30 "exposePosition" true
+magmaNode.setNodeProperty node30 "channels" ""
+magmaNode.DeclareExtensionProperty node30 "EditorPan"
+magmaNode.SetNodeProperty node30 "EditorPan" [0,0]
+magmaNode.DeclareExtensionProperty node30 "EditorZoom"
+magmaNode.SetNodeProperty node30 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node30 "Name"
+magmaNode.SetNodeProperty node30 "Name" "Vertex3"
+magmaNode.DeclareExtensionProperty node30 "Position"
+magmaNode.SetNodeProperty node30 "Position" [310,220]
+--------------------------------------------
+node31 = magmaNode.createNode "Subtract" 
+magmaNode.setNumNodeInputs node31 2 
+magmaNode.setNumNodeOutputs node31 1 
+magmaNode.setNodeInputDefaultValue node31 1 1.0
+magmaNode.setNodeInputDefaultValue node31 2 0.0
+magmaNode.DeclareExtensionProperty node31 "EditorPan"
+magmaNode.SetNodeProperty node31 "EditorPan" [0,0]
+magmaNode.DeclareExtensionProperty node31 "EditorZoom"
+magmaNode.SetNodeProperty node31 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node31 "Name"
+magmaNode.SetNodeProperty node31 "Name" "Edge1"
+magmaNode.DeclareExtensionProperty node31 "Position"
+magmaNode.SetNodeProperty node31 "Position" [470,60]
+--------------------------------------------
+node32 = magmaNode.createNode "Subtract" 
+magmaNode.setNumNodeInputs node32 2 
+magmaNode.setNumNodeOutputs node32 1 
+magmaNode.setNodeInputDefaultValue node32 1 1.0
+magmaNode.setNodeInputDefaultValue node32 2 0.0
+magmaNode.DeclareExtensionProperty node32 "EditorPan"
+magmaNode.SetNodeProperty node32 "EditorPan" [0,0]
+magmaNode.DeclareExtensionProperty node32 "EditorZoom"
+magmaNode.SetNodeProperty node32 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node32 "Name"
+magmaNode.SetNodeProperty node32 "Name" "Edge2"
+magmaNode.DeclareExtensionProperty node32 "Position"
+magmaNode.SetNodeProperty node32 "Position" [470,150]
+--------------------------------------------
+node33 = magmaNode.createNode "VectorCross" 
+magmaNode.setNumNodeInputs node33 2 
+magmaNode.setNumNodeOutputs node33 1 
+magmaNode.DeclareExtensionProperty node33 "EditorPan"
+magmaNode.SetNodeProperty node33 "EditorPan" [0,0]
+magmaNode.DeclareExtensionProperty node33 "EditorZoom"
+magmaNode.SetNodeProperty node33 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node33 "Notes"
+magmaNode.SetNodeProperty node33 "Notes" "The cross product vector's\nmagnitude is equal to the area\nof the parallelogram defined by\nthe two vectors, so half of that\nwould be the face's area."
+magmaNode.DeclareExtensionProperty node33 "Position"
+magmaNode.SetNodeProperty node33 "Position" [620,100]
+--------------------------------------------
+node34 = magmaNode.createNode "Magnitude" 
+magmaNode.setNumNodeInputs node34 1 
+magmaNode.setNumNodeOutputs node34 1 
+magmaNode.DeclareExtensionProperty node34 "EditorPan"
+magmaNode.SetNodeProperty node34 "EditorPan" [0,0]
+magmaNode.DeclareExtensionProperty node34 "EditorZoom"
+magmaNode.SetNodeProperty node34 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node34 "Notes"
+magmaNode.SetNodeProperty node34 "Notes" "This is the area of the \nparallelogram defined by the\ntwo edges."
+magmaNode.DeclareExtensionProperty node34 "Position"
+magmaNode.SetNodeProperty node34 "Position" [770,100]
+--------------------------------------------
+node35 = magmaNode.createNode "Divide" 
+magmaNode.setNumNodeInputs node35 2 
+magmaNode.setNumNodeOutputs node35 1 
+magmaNode.setNodeInputDefaultValue node35 1 1.0
+magmaNode.setNodeInputDefaultValue node35 2 2.0
+magmaNode.DeclareExtensionProperty node35 "EditorPan"
+magmaNode.SetNodeProperty node35 "EditorPan" [0,0]
+magmaNode.DeclareExtensionProperty node35 "EditorZoom"
+magmaNode.SetNodeProperty node35 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node35 "Name"
+magmaNode.SetNodeProperty node35 "Name" "FaceArea"
+magmaNode.DeclareExtensionProperty node35 "Notes"
+magmaNode.SetNodeProperty node35 "Notes" "We have to divide the area\nof the parallelogram by 2\nto get the area of the face."
+magmaNode.DeclareExtensionProperty node35 "Position"
+magmaNode.SetNodeProperty node35 "Position" [910,90]
+--------------------------------------------
+try(magmaNode.setNodeInput node28 1 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 1)[1] 1)catch()
+try(magmaNode.setNodeInput node28 2 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 2)[1] 2)catch()
+try(magmaNode.setNodeInput node28 3 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 3)[1] 3)catch()
+magmaNode.setNodeInput node28 4 -1 1 
+try(magmaNode.setNodeInput node29 1 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 1)[1] 1)catch()
+try(magmaNode.setNodeInput node29 2 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 2)[1] 2)catch()
+try(magmaNode.setNodeInput node29 3 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 3)[1] 3)catch()
+magmaNode.setNodeInput node29 4 -1 1 
+try(magmaNode.setNodeInput node30 1 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 1)[1] 1)catch()
+try(magmaNode.setNodeInput node30 2 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 2)[1] 2)catch()
+try(magmaNode.setNodeInput node30 3 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 3)[1] 3)catch()
+magmaNode.setNodeInput node30 4 -1 1 
+try(magmaNode.setNodeInput node31 1 node28 1)catch()
+try(magmaNode.setNodeInput node31 2 node29 1)catch()
+try(magmaNode.setNodeInput node32 1 node28 1)catch()
+try(magmaNode.setNodeInput node32 2 node30 1)catch()
+try(magmaNode.setNodeInput node33 1 node31 1)catch()
+try(magmaNode.setNodeInput node33 2 node32 1)catch()
+try(magmaNode.setNodeInput node34 1 node33 1)catch()
+try(magmaNode.setNodeInput node35 1 node34 1)catch()
+magmaNode.setNodeInput node35 2 -1 1 
+try(magmaNode.setOutput 1 node35 1)catch(format "Failed To Connect Output 1\n")
+magmaNode.PopEditableBLOP() 
+--------------------------------------------
+try(magmaNode.setNodeInput node26 1 node2 1)catch()
+try(magmaNode.setNodeInput node26 2 node20 1)catch()
+try(magmaNode.setNodeInput node26 3 node3 1)catch()
+--------------------------------------------
+)
+

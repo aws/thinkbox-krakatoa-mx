@@ -1,0 +1,106 @@
+(--MAGMAFLOW2--
+global MagmaFlowEditor_EditBLOPHistory = #()
+magmaNode.note=""
+node24 = magmaNode.createNode "BLOP" 
+magmaNode.setNumNodeInputs node24 3 
+magmaNode.setNumNodeOutputs node24 1 
+magmaNode.DeclareExtensionProperty node24 "BLOPInputSocketName1"
+magmaNode.SetNodeProperty node24 "BLOPInputSocketName1" "Vector"
+magmaNode.DeclareExtensionProperty node24 "BLOPInputSocketName2"
+magmaNode.SetNodeProperty node24 "BLOPInputSocketName2" "Normal"
+magmaNode.DeclareExtensionProperty node24 "BLOPInputSocketName3"
+magmaNode.SetNodeProperty node24 "BLOPInputSocketName3" "Tangent"
+magmaNode.DeclareExtensionProperty node24 "Name"
+magmaNode.SetNodeProperty node24 "Name" "XFormVbyNxT"
+magmaNode.DeclareExtensionProperty node24 "Notes"
+magmaNode.SetNodeProperty node24 "Notes" "Transforms the Input Vector \ninto the coordinate space \ndefined by the Normal and\nTangent vectors."
+magmaNode.DeclareExtensionProperty node24 "Position"
+magmaNode.SetNodeProperty node24 "Position" [680,30]
+magmaNode.DeclareExtensionProperty node24 "Selected"
+magmaNode.SetNodeProperty node24 "Selected" true
+--------------------------------------------
+magmaNode.PushEditableBLOP node24 
+node26 = magmaNode.createNode "VectorsToQuat" 
+magmaNode.setNumNodeInputs node26 3 
+magmaNode.setNumNodeOutputs node26 1 
+magmaNode.setNodeInputDefaultValue node26 1 [1,0,0]
+magmaNode.setNodeInputDefaultValue node26 2 [0,1,0]
+magmaNode.setNodeInputDefaultValue node26 3 [0,0,1]
+magmaNode.DeclareExtensionProperty node26 "EditorPan"
+magmaNode.SetNodeProperty node26 "EditorPan" [-72,16]
+magmaNode.DeclareExtensionProperty node26 "EditorZoom"
+magmaNode.SetNodeProperty node26 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node26 "Position"
+magmaNode.SetNodeProperty node26 "Position" [682,15]
+--------------------------------------------
+node27 = magmaNode.createNode "VectorCross" 
+magmaNode.setNumNodeInputs node27 2 
+magmaNode.setNumNodeOutputs node27 1 
+magmaNode.DeclareExtensionProperty node27 "EditorPan"
+magmaNode.SetNodeProperty node27 "EditorPan" [-72,16]
+magmaNode.DeclareExtensionProperty node27 "EditorZoom"
+magmaNode.SetNodeProperty node27 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node27 "Position"
+magmaNode.SetNodeProperty node27 "Position" [402,45]
+--------------------------------------------
+node28 = magmaNode.createNode "Normalize" 
+magmaNode.setNumNodeInputs node28 1 
+magmaNode.setNumNodeOutputs node28 1 
+magmaNode.DeclareExtensionProperty node28 "EditorPan"
+magmaNode.SetNodeProperty node28 "EditorPan" [-72,16]
+magmaNode.DeclareExtensionProperty node28 "EditorZoom"
+magmaNode.SetNodeProperty node28 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node28 "Position"
+magmaNode.SetNodeProperty node28 "Position" [542,30]
+--------------------------------------------
+node29 = magmaNode.createNode "TransformByQuat" 
+magmaNode.setNumNodeInputs node29 2 
+magmaNode.setNumNodeOutputs node29 1 
+magmaNode.setNodeInputDefaultValue node29 1 (quat 0 0 0 1)
+magmaNode.setNodeInputDefaultValue node29 2 [0,0,0]
+magmaNode.DeclareExtensionProperty node29 "EditorPan"
+magmaNode.SetNodeProperty node29 "EditorPan" [-72,16]
+magmaNode.DeclareExtensionProperty node29 "EditorZoom"
+magmaNode.SetNodeProperty node29 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node29 "Position"
+magmaNode.SetNodeProperty node29 "Position" [822,0]
+--------------------------------------------
+node30 = magmaNode.createNode "Normalize" 
+magmaNode.setNumNodeInputs node30 1 
+magmaNode.setNumNodeOutputs node30 1 
+magmaNode.DeclareExtensionProperty node30 "EditorPan"
+magmaNode.SetNodeProperty node30 "EditorPan" [-72,16]
+magmaNode.DeclareExtensionProperty node30 "EditorZoom"
+magmaNode.SetNodeProperty node30 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node30 "Position"
+magmaNode.SetNodeProperty node30 "Position" [542,100]
+--------------------------------------------
+node31 = magmaNode.createNode "Normalize" 
+magmaNode.setNumNodeInputs node31 1 
+magmaNode.setNumNodeOutputs node31 1 
+magmaNode.DeclareExtensionProperty node31 "EditorPan"
+magmaNode.SetNodeProperty node31 "EditorPan" [-72,16]
+magmaNode.DeclareExtensionProperty node31 "EditorZoom"
+magmaNode.SetNodeProperty node31 "EditorZoom" 1.0
+magmaNode.DeclareExtensionProperty node31 "Position"
+magmaNode.SetNodeProperty node31 "Position" [542,170]
+--------------------------------------------
+try(magmaNode.setNodeInput node26 1 node28 1)catch()
+try(magmaNode.setNodeInput node26 2 node30 1)catch()
+try(magmaNode.setNodeInput node26 3 node31 1)catch()
+try(magmaNode.setNodeInput node27 1 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 2)[1] 2)catch()
+try(magmaNode.setNodeInput node27 2 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 3)[1] 3)catch()
+try(magmaNode.setNodeInput node28 1 node27 1)catch()
+try(magmaNode.setNodeInput node29 1 node26 1)catch()
+try(magmaNode.setNodeInput node29 2 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 1)[1] 1)catch()
+try(magmaNode.setNodeInput node30 1 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 2)[1] 2)catch()
+try(magmaNode.setNodeInput node31 1 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 3)[1] 3)catch()
+try(magmaNode.setOutput 1 node29 1)catch(format "Failed To Connect Output 1\n")
+magmaNode.PopEditableBLOP() 
+--------------------------------------------
+try(magmaNode.setNodeInput node24 1 node8 1)catch()
+try(magmaNode.setNodeInput node24 2 node1 3)catch()
+try(magmaNode.setNodeInput node24 3 node1 2)catch()
+--------------------------------------------
+)
+

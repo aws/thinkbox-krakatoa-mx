@@ -1,0 +1,87 @@
+(--MAGMAFLOW2--
+global MagmaFlowEditor_EditBLOPHistory = #()
+magmaNode.note=""
+node8 = magmaNode.createNode "BLOP" 
+magmaNode.setNumNodeInputs node8 3 
+magmaNode.setNumNodeOutputs node8 1 
+magmaNode.DeclareExtensionProperty node8 "BLOPInputSocketName1"
+magmaNode.SetNodeProperty node8 "BLOPInputSocketName1" "ZOffset"
+magmaNode.DeclareExtensionProperty node8 "BLOPInputSocketName2"
+magmaNode.SetNodeProperty node8 "BLOPInputSocketName2" "AngleInRad"
+magmaNode.DeclareExtensionProperty node8 "BLOPInputSocketName3"
+magmaNode.SetNodeProperty node8 "BLOPInputSocketName3" "Radius"
+magmaNode.DeclareExtensionProperty node8 "Name"
+magmaNode.SetNodeProperty node8 "Name" "MakeCircle"
+magmaNode.DeclareExtensionProperty node8 "Notes"
+magmaNode.SetNodeProperty node8 "Notes" "Creates a Circular Position \nVector based on Angle and\nZ offset."
+magmaNode.DeclareExtensionProperty node8 "Position"
+magmaNode.SetNodeProperty node8 "Position" [540,50]
+magmaNode.DeclareExtensionProperty node8 "Selected"
+magmaNode.SetNodeProperty node8 "Selected" true
+--------------------------------------------
+magmaNode.PushEditableBLOP node8 
+node10 = magmaNode.createNode "ToVector" 
+magmaNode.setNumNodeInputs node10 3 
+magmaNode.setNumNodeOutputs node10 1 
+magmaNode.setNodeInputDefaultValue node10 1 0.0
+magmaNode.setNodeInputDefaultValue node10 2 0.0
+magmaNode.setNodeInputDefaultValue node10 3 0.0
+magmaNode.DeclareExtensionProperty node10 "Position"
+magmaNode.SetNodeProperty node10 "Position" [542,145]
+magmaNode.DeclareExtensionProperty node10 "Selected"
+magmaNode.SetNodeProperty node10 "Selected" true
+--------------------------------------------
+node11 = magmaNode.createNode "Sin" 
+magmaNode.setNumNodeInputs node11 1 
+magmaNode.setNumNodeOutputs node11 1 
+magmaNode.DeclareExtensionProperty node11 "Position"
+magmaNode.SetNodeProperty node11 "Position" [262,300]
+magmaNode.DeclareExtensionProperty node11 "Selected"
+magmaNode.SetNodeProperty node11 "Selected" true
+--------------------------------------------
+node12 = magmaNode.createNode "Cos" 
+magmaNode.setNumNodeInputs node12 1 
+magmaNode.setNumNodeOutputs node12 1 
+magmaNode.DeclareExtensionProperty node12 "Position"
+magmaNode.SetNodeProperty node12 "Position" [262,175]
+magmaNode.DeclareExtensionProperty node12 "Selected"
+magmaNode.SetNodeProperty node12 "Selected" true
+--------------------------------------------
+node13 = magmaNode.createNode "Multiply" 
+magmaNode.setNumNodeInputs node13 2 
+magmaNode.setNumNodeOutputs node13 1 
+magmaNode.setNodeInputDefaultValue node13 1 1.0
+magmaNode.setNodeInputDefaultValue node13 2 1.0
+magmaNode.DeclareExtensionProperty node13 "Position"
+magmaNode.SetNodeProperty node13 "Position" [402,245]
+magmaNode.DeclareExtensionProperty node13 "Selected"
+magmaNode.SetNodeProperty node13 "Selected" true
+--------------------------------------------
+node14 = magmaNode.createNode "Multiply" 
+magmaNode.setNumNodeInputs node14 2 
+magmaNode.setNumNodeOutputs node14 1 
+magmaNode.setNodeInputDefaultValue node14 1 1.0
+magmaNode.setNodeInputDefaultValue node14 2 1.0
+magmaNode.DeclareExtensionProperty node14 "Position"
+magmaNode.SetNodeProperty node14 "Position" [402,160]
+magmaNode.DeclareExtensionProperty node14 "Selected"
+magmaNode.SetNodeProperty node14 "Selected" true
+--------------------------------------------
+try(magmaNode.setNodeInput node10 1 node14 1)catch()
+try(magmaNode.setNodeInput node10 2 node13 1)catch()
+try(magmaNode.setNodeInput node10 3 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 1)[1] 1)catch()
+try(magmaNode.setNodeInput node11 1 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 2)[1] 2)catch()
+try(magmaNode.setNodeInput node12 1 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 2)[1] 2)catch()
+try(magmaNode.setNodeInput node13 1 node11 1)catch()
+try(magmaNode.setNodeInput node13 2 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 3)[1] 3)catch()
+try(magmaNode.setNodeInput node14 1 node12 1)catch()
+try(magmaNode.setNodeInput node14 2 (magmaNode.GetNodeInput (magmaNode.CurrentBLOP) 3)[1] 3)catch()
+try(magmaNode.setOutput 1 node10 1)catch(format "Failed To Connect Output 1\n")
+magmaNode.PopEditableBLOP() 
+--------------------------------------------
+try(magmaNode.setNodeInput node8 1 node16 1)catch()
+try(magmaNode.setNodeInput node8 2 node21 1)catch()
+try(magmaNode.setNodeInput node8 3 node20 1)catch()
+--------------------------------------------
+)
+
